@@ -5,10 +5,11 @@ from .models import Product
 
 
 def main(request):
-    return render(request, 'products/index.html')
+    products = Product.objects
+    return render(request, 'products/index.html', {'products': products})
 
 
-@login_required
+@login_required(login_url="/auth/signup")
 def create(request):
     if request.method == 'POST':
         if request.POST['title'] and request.POST['product_url'] and request.POST['product_body'] and request.FILES['product_icon'] and request.FILES['product_image']:
@@ -33,3 +34,12 @@ def create(request):
 def detail(request, product_id):
     product = get_object_or_404(Product, pk=product_id)
     return render(request, 'products/detail.html', {'product': product})
+
+
+@login_required(login_url="/auth/signup")
+def upvote(request, product_id):
+    if request.method == 'POST':
+        product = get_object_or_404(Product, pk=product_id)
+        product.votes_total += 1
+        product.save()
+        return redirect('/products/' + str(product.id))
