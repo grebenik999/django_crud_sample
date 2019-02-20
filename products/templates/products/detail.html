@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="row mt-5">
+    <div class="col-4">
+        <div class="icon-wrap">
+            <img src="{{ product.icon.url }}" alt="{{ product.title }}">
+        </div>
+    </div>
+    <div class="col-8">
+        <div class="title-wrap">
+            <h1>{{ product.title }}</h1>
+            
+        </div>
+    </div>
+</div>
+<div class="row mt-3">
+    <div class="col-10">
+        <div class="image-wrap">
+            <img class="img-fluid" src="{{ product.image.url }}" alt="{{ product.title }}">
+        </div>
+    </div>
+    <div class="col-2">
+        <div class="vote">
+            <a href="javascript:{}" class="btn btn-danger btn-block"><span><i class="fa fa-caret-up" aria-hidden="true"></i></span> Upvote {{ product.votes_total }}</a>
+        </div>
+    </div>
+</div>
+<div class="row mt-3">
+    <div class="col-6">
+        <h3>Hunted by {{ product.hunter }}</h3>
+    </div>
+    <div class="col-6">
+        <h3>Published: {{ product.pub_date_pretty }}</h3>
+    </div>
+</div>
+<div class="row mt-3 mb-3">
+    <div class="col-10">
+        <article>{{ product.body }}</article>
+    </div>
+</div>
+
+
+{% endblock %}
